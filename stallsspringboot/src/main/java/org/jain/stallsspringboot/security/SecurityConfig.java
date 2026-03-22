@@ -37,49 +37,52 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        http
-            .cors(cors -> {})
-            .csrf(csrf -> csrf.disable())
-            .sessionManagement(session ->
-                session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            )
-            .authorizeHttpRequests(auth -> auth
+    http
+        .cors(cors -> {})
+        .csrf(csrf -> csrf.disable())
+        .sessionManagement(session ->
+            session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        )
+        .authorizeHttpRequests(auth -> auth
 
-                .requestMatchers("/api/auth/**", "/api/payment/**","/uploads/**").permitAll()
+            // ✅ ADD THIS LINE (VERY IMPORTANT)
+            .requestMatchers("/").permitAll()
 
-                // STALLS
-                .requestMatchers("/api/stalls/admin/**").hasRole("ADMIN")
-                .requestMatchers("/api/stalls/vendor/**").hasAnyRole("VENDOR","ADMIN")
-                .requestMatchers("/api/stalls/customer").hasAnyRole("CUSTOMER","ADMIN")
+            .requestMatchers("/api/auth/**", "/api/payment/**","/uploads/**").permitAll()
 
-                // ⭐ IMPORTANT
-                .requestMatchers("/api/stalls/*/products").permitAll()
+            // STALLS
+            .requestMatchers("/api/stalls/admin/**").hasRole("ADMIN")
+            .requestMatchers("/api/stalls/vendor/**").hasAnyRole("VENDOR","ADMIN")
+            .requestMatchers("/api/stalls/customer").hasAnyRole("CUSTOMER","ADMIN")
 
-                // PRODUCTS
-                .requestMatchers("/api/products/**").permitAll()
+            // ⭐ IMPORTANT
+            .requestMatchers("/api/stalls/*/products").permitAll()
 
-                // CART
-                .requestMatchers("/api/cart/**").hasRole("CUSTOMER")
+            // PRODUCTS
+            .requestMatchers("/api/products/**").permitAll()
 
-                // ORDERS
-                .requestMatchers("/api/orders/my-orders").hasRole("CUSTOMER")
-                .requestMatchers("/api/orders/checkout").hasRole("CUSTOMER")
-                .requestMatchers("/api/orders/vendor-orders").hasRole("VENDOR")
-                .requestMatchers("/api/orders/vendor-revenue").hasRole("VENDOR")
+            // CART
+            .requestMatchers("/api/cart/**").hasRole("CUSTOMER")
 
-                // ADMIN
-                .requestMatchers("/api/admin/**").hasRole("ADMIN")
+            // ORDERS
+            .requestMatchers("/api/orders/my-orders").hasRole("CUSTOMER")
+            .requestMatchers("/api/orders/checkout").hasRole("CUSTOMER")
+            .requestMatchers("/api/orders/vendor-orders").hasRole("VENDOR")
+            .requestMatchers("/api/orders/vendor-revenue").hasRole("VENDOR")
 
-                .anyRequest().authenticated()
-            );
+            // ADMIN
+            .requestMatchers("/api/admin/**").hasRole("ADMIN")
 
-        http.addFilterBefore(jwtFilter,
-                UsernamePasswordAuthenticationFilter.class);
+            .anyRequest().authenticated()
+        );
 
-        return http.build();
-    }
+    http.addFilterBefore(jwtFilter,
+            UsernamePasswordAuthenticationFilter.class);
+
+    return http.build();
+}
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
