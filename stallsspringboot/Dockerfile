@@ -1,11 +1,11 @@
-FROM eclipse-temurin:17-jdk
+FROM openjdk:17-jdk-slim
 
 WORKDIR /app
 
 COPY . .
 
 RUN chmod +x mvnw
-RUN ./mvnw clean install -DskipTests
+RUN ./mvnw clean package -DskipTests
 
 EXPOSE 8080
 
