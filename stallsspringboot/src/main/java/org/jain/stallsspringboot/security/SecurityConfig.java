@@ -36,7 +36,7 @@ public class SecurityConfig {
         return config.getAuthenticationManager();
     }
 
-    @Bean
+   @Bean
 public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
     http
@@ -47,8 +47,8 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         )
         .authorizeHttpRequests(auth -> auth
 
-            // ✅ ADD THIS LINE (VERY IMPORTANT)
-            .requestMatchers("/").permitAll()
+            // ✅ IMPORTANT FIX
+            .requestMatchers("/", "/index.html").permitAll()
 
             .requestMatchers("/api/auth/**", "/api/payment/**","/uploads/**").permitAll()
 
@@ -57,10 +57,8 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
             .requestMatchers("/api/stalls/vendor/**").hasAnyRole("VENDOR","ADMIN")
             .requestMatchers("/api/stalls/customer").hasAnyRole("CUSTOMER","ADMIN")
 
-            // ⭐ IMPORTANT
+            // PRODUCTS PUBLIC
             .requestMatchers("/api/stalls/*/products").permitAll()
-
-            // PRODUCTS
             .requestMatchers("/api/products/**").permitAll()
 
             // CART
@@ -83,7 +81,6 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
     return http.build();
 }
-
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
 
