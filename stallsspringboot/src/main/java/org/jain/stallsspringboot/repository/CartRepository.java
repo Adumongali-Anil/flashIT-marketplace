@@ -1,0 +1,12 @@
+package org.jain.stallsspringboot.repository;
+
+import org.jain.stallsspringboot.entity.Cart;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface CartRepository extends JpaRepository<Cart, Integer> {
+
+    List<Cart> findByUserUsername(String username);
+    Cart findByUserUsernameAndProductId(String username, Long productId);
+}
