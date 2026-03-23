@@ -47,28 +47,29 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         )
         .authorizeHttpRequests(auth -> auth
 
-            // ✅ VERY IMPORTANT (fix React 401 + blank page)
+            // ✅ VERY IMPORTANT (ALLOW FRONTEND FILES)
             .requestMatchers(
                 "/",
                 "/index.html",
                 "/static/**",
                 "/manifest.json",
                 "/favicon.ico",
-                "/*.js",
-                "/*.css"
+                "/**/*.js",
+                "/**/*.css",
+                "/**/*.png",
+                "/**/*.jpg"
             ).permitAll()
 
-            // ✅ PUBLIC AUTH
+            // AUTH
             .requestMatchers("/api/auth/**").permitAll()
 
-            // ✅ PUBLIC APIs
-            .requestMatchers("/api/products/**").permitAll()
-            .requestMatchers("/api/stalls/*/products").permitAll()
-
-            // ✅ PAYMENT & FILES
+            // PAYMENT + UPLOAD
             .requestMatchers("/api/payment/**", "/uploads/**").permitAll()
 
-            // 🔥 YOUR ORIGINAL ROLE LOGIC (KEPT SAFE)
+            // PRODUCTS PUBLIC
+            .requestMatchers("/api/stalls/*/products").permitAll()
+            .requestMatchers("/api/products/**").permitAll()
+
             // STALLS
             .requestMatchers("/api/stalls/admin/**").hasRole("ADMIN")
             .requestMatchers("/api/stalls/vendor/**").hasAnyRole("VENDOR","ADMIN")
@@ -78,16 +79,13 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
             .requestMatchers("/api/cart/**").hasRole("CUSTOMER")
 
             // ORDERS
-            .requestMatchers("/api/orders/my-orders").hasRole("CUSTOMER")
-            .requestMatchers("/api/orders/checkout").hasRole("CUSTOMER")
-            .requestMatchers("/api/orders/vendor-orders").hasRole("VENDOR")
-            .requestMatchers("/api/orders/vendor-revenue").hasRole("VENDOR")
+            .requestMatchers("/api/orders/**").authenticated()
 
             // ADMIN
             .requestMatchers("/api/admin/**").hasRole("ADMIN")
 
-            // 🔐 EVERYTHING ELSE PROTECTED
-            .anyRequest().authenticated()
+            // ✅ EVERYTHING ELSE PUBLIC (VERY IMPORTANT)
+            .anyRequest().permitAll()
         );
 
     http.addFilterBefore(jwtFilter,
