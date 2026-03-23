@@ -55,29 +55,29 @@ function Register() {
   // SEND OTP
   const sendOtp = async () => {
 
-  console.log("Sending OTP...");
+  console.log("Sending OTP...", user.email);
 
-  if (!user.email) {
-    alert("Enter email first");
+  if (!user.email || user.email.trim() === "") {
+    alert("Enter valid email");
     return;
   }
 
   try {
 
     const res = await api.post("/api/auth/send-otp", {
-      email: user.email
+      email: user.email.trim()
     });
 
-    console.log("RESPONSE:", res);
+    console.log("RESPONSE:", res.data);
 
-    alert("OTP sent");
+    alert(res.data.message || "OTP sent");
 
     setOtpSent(true);
     setTimer(30);
 
   } catch (err) {
 
-    console.log("ERROR:", err);
+    console.log("ERROR:", err.response?.data || err);
 
     alert("OTP Failed");
   }
