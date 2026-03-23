@@ -57,8 +57,8 @@ public class AuthController {
         otpRepository.save(otpEntity);
 
         // ✅ SEND REAL EMAIL
-        // emailService.sendOtp(email, otp);
-        System.out.println("OTP: " + otp);
+        emailService.sendOtp(email, otp);
+        // System.out.println("OTP: " + otp);
 
         return Map.of("message","OTP sent to your email 📩");
     }
