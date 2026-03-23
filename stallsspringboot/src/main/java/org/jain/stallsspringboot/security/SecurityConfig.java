@@ -93,15 +93,13 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
     return http.build();
 }
-   @Bean
+  @Bean
 public CorsConfigurationSource corsConfigurationSource() {
 
     CorsConfiguration configuration = new CorsConfiguration();
 
-    configuration.setAllowedOriginPatterns(List.of(
-        "http://localhost:3000",
-        "https://*.vercel.app"
-    ));
+    // 🔥 allow all (for deployment testing)
+    configuration.setAllowedOriginPatterns(List.of("*"));
 
     configuration.setAllowedMethods(List.of(
         "GET", "POST", "PUT", "DELETE", "OPTIONS"
@@ -109,7 +107,8 @@ public CorsConfigurationSource corsConfigurationSource() {
 
     configuration.setAllowedHeaders(List.of("*"));
 
-    configuration.setAllowCredentials(true);
+    // ❗ IMPORTANT: disable credentials for wildcard
+    configuration.setAllowCredentials(false);
 
     UrlBasedCorsConfigurationSource source =
             new UrlBasedCorsConfigurationSource();
