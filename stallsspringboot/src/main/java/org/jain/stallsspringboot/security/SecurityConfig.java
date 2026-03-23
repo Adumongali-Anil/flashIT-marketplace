@@ -93,24 +93,29 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
     return http.build();
 }
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
+   @Bean
+public CorsConfigurationSource corsConfigurationSource() {
 
-        CorsConfiguration configuration = new CorsConfiguration();
+    CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(List.of(
-    "http://localhost:3000",
-    "https://flashit-marketplace.onrender.com"
-));
-        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE","OPTIONS"));
-        configuration.setAllowedHeaders(List.of("*"));
-        configuration.setAllowCredentials(true);
+    configuration.setAllowedOriginPatterns(List.of(
+        "http://localhost:3000",
+        "https://*.vercel.app"
+    ));
 
-        UrlBasedCorsConfigurationSource source =
-                new UrlBasedCorsConfigurationSource();
+    configuration.setAllowedMethods(List.of(
+        "GET", "POST", "PUT", "DELETE", "OPTIONS"
+    ));
 
-        source.registerCorsConfiguration("/**", configuration);
+    configuration.setAllowedHeaders(List.of("*"));
 
-        return source;
-    }
+    configuration.setAllowCredentials(true);
+
+    UrlBasedCorsConfigurationSource source =
+            new UrlBasedCorsConfigurationSource();
+
+    source.registerCorsConfiguration("/**", configuration);
+
+    return source;
+}
 }
