@@ -47,19 +47,32 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         )
         .authorizeHttpRequests(auth -> auth
 
-            // ✅ IMPORTANT FIX
-            .requestMatchers("/", "/index.html").permitAll()
+            // ✅ VERY IMPORTANT (fix React 401 + blank page)
+            .requestMatchers(
+                "/",
+                "/index.html",
+                "/static/**",
+                "/manifest.json",
+                "/favicon.ico",
+                "/*.js",
+                "/*.css"
+            ).permitAll()
 
-            .requestMatchers("/api/auth/**", "/api/payment/**","/uploads/**").permitAll()
+            // ✅ PUBLIC AUTH
+            .requestMatchers("/api/auth/**").permitAll()
 
+            // ✅ PUBLIC APIs
+            .requestMatchers("/api/products/**").permitAll()
+            .requestMatchers("/api/stalls/*/products").permitAll()
+
+            // ✅ PAYMENT & FILES
+            .requestMatchers("/api/payment/**", "/uploads/**").permitAll()
+
+            // 🔥 YOUR ORIGINAL ROLE LOGIC (KEPT SAFE)
             // STALLS
             .requestMatchers("/api/stalls/admin/**").hasRole("ADMIN")
             .requestMatchers("/api/stalls/vendor/**").hasAnyRole("VENDOR","ADMIN")
             .requestMatchers("/api/stalls/customer").hasAnyRole("CUSTOMER","ADMIN")
-
-            // PRODUCTS PUBLIC
-            .requestMatchers("/api/stalls/*/products").permitAll()
-            .requestMatchers("/api/products/**").permitAll()
 
             // CART
             .requestMatchers("/api/cart/**").hasRole("CUSTOMER")
@@ -73,6 +86,7 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
             // ADMIN
             .requestMatchers("/api/admin/**").hasRole("ADMIN")
 
+            // 🔐 EVERYTHING ELSE PROTECTED
             .anyRequest().authenticated()
         );
 
