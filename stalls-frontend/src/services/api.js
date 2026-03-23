@@ -6,8 +6,6 @@ const api = axios.create({
 
 api.interceptors.request.use((config) => {
 
-  config.withCredentials = true; // ✅ ADD THIS
-
   let token = localStorage.getItem("token");
 
   if (token) {
