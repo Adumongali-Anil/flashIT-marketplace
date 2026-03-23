@@ -83,21 +83,6 @@ function Register() {
   }
 };
 
-      console.log(res); // debug
-
-      alert("OTP sent successfully");
-
-      setOtpSent(true);
-      setTimer(30);
-
-    } catch (err) {
-
-      console.log("ERROR:", err); // 🔥 VERY IMPORTANT
-
-      alert("OTP Failed (check console)");
-    }
-  };
-
   // REGISTER
   const handleRegister = async () => {
 
