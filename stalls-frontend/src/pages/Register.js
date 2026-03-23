@@ -53,7 +53,9 @@ function Register() {
   }, [timer]);
 
   // SEND OTP
-  const sendOtp = async () => {
+  const sendOtp = async (e) => {
+
+    e.preventDefault(); // ✅ VERY IMPORTANT
 
     if (!user.email) {
       alert("Enter email first");
@@ -61,17 +63,25 @@ function Register() {
     }
 
     try {
+
+      console.log("Sending OTP..."); // debug
+
       const res = await api.post("/api/auth/send-otp", {
         email: user.email
       });
 
-      alert(res.data.message);
+      console.log(res); // debug
+
+      alert("OTP sent successfully");
 
       setOtpSent(true);
       setTimer(30);
 
     } catch (err) {
-      alert(err.response?.data?.message || "Error sending OTP");
+
+      console.log("ERROR:", err); // 🔥 VERY IMPORTANT
+
+      alert("OTP Failed (check console)");
     }
   };
 
@@ -206,7 +216,8 @@ function Register() {
           {/* SEND OTP */}
           <Button
             variant="outlined"
-            onClick={sendOtp}
+            type="button"
+            onClick={(e) => sendOtp(e)}
             disabled={timer > 0}
           >
             {timer > 0 ? `Resend OTP in ${timer}s` : "Send OTP"}

@@ -93,21 +93,14 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
     return http.build();
 }
-  @Bean
+ @Bean
 public CorsConfigurationSource corsConfigurationSource() {
 
     CorsConfiguration configuration = new CorsConfiguration();
 
-    // 🔥 allow all (for deployment testing)
     configuration.setAllowedOriginPatterns(List.of("*"));
-
-    configuration.setAllowedMethods(List.of(
-        "GET", "POST", "PUT", "DELETE", "OPTIONS"
-    ));
-
+    configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
     configuration.setAllowedHeaders(List.of("*"));
-
-    // ❗ IMPORTANT: disable credentials for wildcard
     configuration.setAllowCredentials(false);
 
     UrlBasedCorsConfigurationSource source =
