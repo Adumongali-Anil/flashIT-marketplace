@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:8080"
+  baseURL: "https://flashit-marketplace.onrender.com"
 });
 
 api.interceptors.request.use((config) => {
@@ -10,7 +10,7 @@ api.interceptors.request.use((config) => {
 
   if (token) {
     token = token.trim();
-    // Guard against common bad stored values
+
     if (
       token === "null" ||
       token === "undefined" ||
@@ -27,7 +27,6 @@ api.interceptors.request.use((config) => {
   }
 
   if (token) {
-    // Avoid "Bearer Bearer <token>" if backend already returns prefixed token
     if (token.toLowerCase().startsWith("bearer ")) {
       token = token.slice(7).trim();
     }
