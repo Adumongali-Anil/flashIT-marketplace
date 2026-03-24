@@ -34,7 +34,7 @@ function StallCard({ stall }) {
       <img
         src={
           stall.imageUrl
-          ? `http://localhost:8080/uploads/${stall.imageUrl}`
+          ? `https://flashit-marketplace.onrender.com/uploads/${stall.imageUrl}`
           : "https://source.unsplash.com/400x250/?restaurant"
         }
         alt=""

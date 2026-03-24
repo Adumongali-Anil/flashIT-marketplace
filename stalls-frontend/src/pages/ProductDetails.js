@@ -72,7 +72,7 @@ function ProductDetails() {
 
         {/* IMAGE WITH ZOOM */}
         <img
-          src={`http://localhost:8080/uploads/${product.imageUrl}`}
+          src={`https://flashit-marketplace.onrender.com/uploads/${product.imageUrl}`}
           alt=""
           style={image}
           onMouseEnter={e => e.target.style.transform = "scale(1.2)"}

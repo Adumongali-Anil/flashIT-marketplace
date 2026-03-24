@@ -40,7 +40,7 @@ function ProductCard({ product, onAdd }) {
       <img
         src={
           product.imageUrl
-            ? `http://localhost:8080/uploads/${product.imageUrl}`
+            ? `https://flashit-marketplace.onrender.com/uploads/${product.imageUrl}`
             : "https://picsum.photos/400/200"
         }
         alt=""

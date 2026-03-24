@@ -192,7 +192,7 @@ boxShadow:"0 15px 35px rgba(0,0,0,0.25)"
 
 <CardMedia
 component="img"
-image={`http://localhost:8080/uploads/${c.product.imageUrl}`}
+image={`https://flashit-marketplace.onrender.com/uploads/${c.product.imageUrl}`}
 sx={{
 height:180,
 objectFit:"cover"

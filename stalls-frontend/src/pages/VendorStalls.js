@@ -113,7 +113,7 @@ function VendorStalls() {
 
     setPreview(
       stall.imageUrl
-        ? `http://localhost:8080/uploads/${stall.imageUrl}`
+        ? `https://flashit-marketplace.onrender.com/uploads/${stall.imageUrl}`
         : null
     );
 
@@ -224,7 +224,7 @@ e.currentTarget.style.boxShadow="0 8px 25px rgba(0,0,0,0.12)";
 <img
 src={
 stall.imageUrl
-?`http://localhost:8080/uploads/${stall.imageUrl}`
+?`https://flashit-marketplace.onrender.com/uploads/${stall.imageUrl}`
 :"https://picsum.photos/400/200"
 }
 alt=""
