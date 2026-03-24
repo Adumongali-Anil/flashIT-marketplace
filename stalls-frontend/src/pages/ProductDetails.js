@@ -9,29 +9,32 @@ function ProductDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
 
+  const role = localStorage.getItem("role"); // ⭐ IMPORTANT
+
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(0);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchProduct();
-    // eslint-disable-next-line
   }, [id]);
 
   const fetchProduct = async () => {
 
     try {
-
       const res = await api.get(`/api/products/${id}`);
       setProduct(res.data);
 
-      const cartRes = await api.get("/api/cart/my-cart");
+      // ✅ ONLY FOR CUSTOMER
+      if (role === "CUSTOMER") {
+        const cartRes = await api.get("/api/cart/my-cart");
 
-      const item = cartRes.data.find(
-        c => c.product.id === parseInt(id)
-      );
+        const item = cartRes.data.find(
+          c => c.product.id === parseInt(id)
+        );
 
-      if (item) setQuantity(item.quantity);
+        if (item) setQuantity(item.quantity);
+      }
 
     } catch (err) {
       console.log(err);
@@ -40,22 +43,20 @@ function ProductDetails() {
     }
   };
 
-  const increase = async () => {
+  /* ================= CUSTOMER ONLY ================= */
 
+  const increase = async () => {
     if (quantity >= product.stock) return;
 
     await api.post(`/api/cart/add/${id}?quantity=1`);
-
     setQuantity(q => q + 1);
     window.dispatchEvent(new Event("cartUpdated"));
   };
 
   const decrease = async () => {
-
     if (quantity === 0) return;
 
     await api.post(`/api/cart/add/${id}?quantity=-1`);
-
     setQuantity(q => q - 1);
     window.dispatchEvent(new Event("cartUpdated"));
   };
@@ -70,7 +71,7 @@ function ProductDetails() {
 
       <div style={card}>
 
-        {/* IMAGE WITH ZOOM */}
+        {/* IMAGE */}
         <img
           src={`https://flashit-marketplace.onrender.com/uploads/${product.imageUrl}`}
           alt=""
@@ -91,32 +92,50 @@ function ProductDetails() {
             ₹{product.price}
           </h2>
 
+          {/* STOCK */}
           {product.stock === 0 ? (
             <p style={{ color: "red" }}>Out of Stock ❌</p>
           ) : (
             <p style={{ color: "green" }}>
-              {remaining} items left
+              {product.stock} items available
             </p>
           )}
 
-          {/* QUANTITY */}
-          <div style={qtyBox}>
+          {/* 🔥 ONLY CUSTOMER CAN SEE BELOW */}
+          {role === "CUSTOMER" && (
 
-            <Button onClick={decrease}>-</Button>
+            <>
+              <p style={{ color: "green" }}>
+                {remaining} left
+              </p>
 
-            <h3>{quantity}</h3>
+              <div style={qtyBox}>
 
-            <Button onClick={increase}>+</Button>
+                <Button onClick={decrease}>-</Button>
 
-          </div>
+                <h3>{quantity}</h3>
 
-          <Button
-            variant="contained"
-            onClick={() => navigate("/cart")}
-            style={{ marginTop: "20px" }}
-          >
-            Go to Cart 🛒
-          </Button>
+                <Button onClick={increase}>+</Button>
+
+              </div>
+
+              <Button
+                variant="contained"
+                onClick={() => navigate("/cart")}
+                style={{ marginTop: "20px" }}
+              >
+                Go to Cart 🛒
+              </Button>
+
+            </>
+          )}
+
+          {/* 🔥 VENDOR VIEW MESSAGE */}
+          {role === "VENDOR" && (
+            <p style={{ marginTop: "20px", color: "#64748b" }}>
+              Vendor View (No cart actions)
+            </p>
+          )}
 
         </div>
 
