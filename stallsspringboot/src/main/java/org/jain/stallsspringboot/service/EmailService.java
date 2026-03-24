@@ -1,31 +1,47 @@
 package org.jain.stallsspringboot.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 @Service
 public class EmailService {
 
-    @Autowired
-    private JavaMailSender mailSender;
+    public void sendOtp(String email, String otp) {
 
-    public void sendOtp(String email, String otp){
+        try {
 
-        SimpleMailMessage message = new SimpleMailMessage();
+            URL url = new URL("https://api.resend.com/emails");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-        message.setTo(email);
-        message.setSubject("🔐 Marketplace Registration OTP");
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Authorization", "Bearer " + System.getenv("RESEND_API_KEY"));
+            conn.setRequestProperty("Content-Type", "application/json");
 
-        message.setText(
-            "Hello User,\n\n" +
-            "Your OTP for registration is: " + otp + "\n\n" +
-            "This OTP is valid for 5 minutes.\n\n" +
-            "Do not share this OTP with anyone.\n\n" +
-            "Regards,\nMarketplace Team"
-        );
+            conn.setDoOutput(true);
 
-        mailSender.send(message);
+            String json = "{"
+                    + "\"from\":\"onboarding@resend.dev\","
+                    + "\"to\":\"" + email + "\","
+                    + "\"subject\":\"Marketplace OTP\","
+                    + "\"html\":\"<h2>Your OTP is: " + otp + "</h2>"
+                    + "<p>This OTP is valid for 5 minutes.</p>\""
+                    + "}";
+
+            OutputStream os = conn.getOutputStream();
+            os.write(json.getBytes());
+            os.flush();
+            os.close();
+
+            int responseCode = conn.getResponseCode();
+
+            System.out.println("✅ Email sent! Response Code: " + responseCode);
+
+        } catch (Exception e) {
+            System.out.println("❌ Email sending failed");
+            e.printStackTrace();
+        }
     }
 }
