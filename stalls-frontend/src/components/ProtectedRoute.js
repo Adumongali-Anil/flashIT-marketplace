@@ -9,9 +9,14 @@ function ProtectedRoute({ children, allowedRole }) {
     return <Navigate to="/" />;
   }
 
-  const payload = JSON.parse(atob(token.split(".")[1]));
+  try {
+    const payload = JSON.parse(atob(token.split(".")[1]));
 
-  if (allowedRole && payload.role !== allowedRole) {
+    if (allowedRole && payload.role !== allowedRole) {
+      return <Navigate to="/" />;
+    }
+
+  } catch (e) {
     return <Navigate to="/" />;
   }
 

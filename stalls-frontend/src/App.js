@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import SelectRole from "./pages/SelectRole";
+import ForgotPassword from "./pages/ForgotPassword";
 
 /* CUSTOMER */
 import CustomerShop from "./pages/CustomerShop";
@@ -35,22 +36,27 @@ import VendorRevenue from "./pages/VendorRevenue";
 import VendorAddProduct from "./pages/VendorAddProduct";
 
 import ProtectedRoute from "./components/ProtectedRoute";
-import ForgotPassword from "./pages/ForgotPassword";
-
-
 
 function App() {
   return (
     <Router>
 
       <Routes>
-            <Route path="/forgot-password" element={<ForgotPassword />} />
+
+        {/* PUBLIC */}
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/select-role" element={<SelectRole />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
 
-        {/* CUSTOMER */}
-        <Route element={<CustomerLayout />}>
+        {/* CUSTOMER (PROTECTED) */}
+        <Route
+          element={
+            <ProtectedRoute allowedRole="CUSTOMER">
+              <CustomerLayout />
+            </ProtectedRoute>
+          }
+        >
           <Route path="/shop" element={<CustomerShop />} />
           <Route path="/stalls" element={<CustomerStalls />} />
           <Route path="/stall/:id" element={<CustomerStallProducts />} />
@@ -58,7 +64,15 @@ function App() {
           <Route path="/cart" element={<CustomerCart />} />
         </Route>
 
-        <Route path="/product/:id" element={<ProductDetails />} />
+        {/* PRODUCT DETAILS (PROTECTED FOR ALL LOGGED USERS) */}
+        <Route
+          path="/product/:id"
+          element={
+            <ProtectedRoute>
+              <ProductDetails />
+            </ProtectedRoute>
+          }
+        />
 
         {/* ADMIN */}
         <Route
