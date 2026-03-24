@@ -16,8 +16,8 @@ function ProductDetails() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchProduct();
-  }, [id]);
+  fetchProduct();
+}, [id]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const fetchProduct = async () => {
 
