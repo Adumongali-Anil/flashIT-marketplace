@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-function ProductCard({ product, onAdd, onDelete, onEdit, isVendor }) {
+function ProductCard({ product, onAdd, onDelete, isVendor }) {
 
   const navigate = useNavigate();
 
@@ -37,7 +37,7 @@ function ProductCard({ product, onAdd, onDelete, onEdit, isVendor }) {
             ? `https://flashit-marketplace.onrender.com/uploads/${product.imageUrl}`
             : "https://picsum.photos/400/200"
         }
-        alt=""
+        alt="product"
         style={{
           width: "100%",
           height: "180px",
@@ -45,6 +45,7 @@ function ProductCard({ product, onAdd, onDelete, onEdit, isVendor }) {
         }}
       />
 
+      {/* CONTENT */}
       <div style={{ padding: "15px" }}>
 
         <h3>{product.name}</h3>
@@ -57,19 +58,20 @@ function ProductCard({ product, onAdd, onDelete, onEdit, isVendor }) {
           ₹{product.price}
         </h3>
 
-        {/* 🔥 ROLE BASED BUTTONS */}
+        {/* ================= ROLE BASED ================= */}
+
         {isVendor ? (
 
-          <>
+          <div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
+
             {/* EDIT BUTTON */}
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                onEdit(product.id);
+                navigate(`/vendor/products/edit/${product.id}`);
               }}
               style={{
-                marginTop: "10px",
-                width: "100%",
+                flex: 1,
                 padding: "10px",
                 background: "#2563eb",
                 color: "#fff",
@@ -88,8 +90,7 @@ function ProductCard({ product, onAdd, onDelete, onEdit, isVendor }) {
                 onDelete(product.id);
               }}
               style={{
-                marginTop: "10px",
-                width: "100%",
+                flex: 1,
                 padding: "10px",
                 background: "#ef4444",
                 color: "#fff",
@@ -100,7 +101,8 @@ function ProductCard({ product, onAdd, onDelete, onEdit, isVendor }) {
             >
               Delete ❌
             </button>
-          </>
+
+          </div>
 
         ) : (
 
