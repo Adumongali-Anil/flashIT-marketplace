@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-function ProductCard({ product, onAdd, onDelete, isVendor }) {
+function ProductCard({ product, onAdd, onDelete, onEdit, isVendor }) {
 
   const navigate = useNavigate();
 
@@ -30,6 +30,7 @@ function ProductCard({ product, onAdd, onDelete, isVendor }) {
       }}
     >
 
+      {/* IMAGE */}
       <img
         src={
           product.imageUrl
@@ -56,27 +57,50 @@ function ProductCard({ product, onAdd, onDelete, isVendor }) {
           ₹{product.price}
         </h3>
 
-        {/* 🔥 ROLE BASED BUTTON */}
+        {/* 🔥 ROLE BASED BUTTONS */}
         {isVendor ? (
 
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              onDelete(product.id);
-            }}
-            style={{
-              marginTop: "10px",
-              width: "100%",
-              padding: "10px",
-              background: "#ef4444",
-              color: "#fff",
-              border: "none",
-              borderRadius: "10px",
-              cursor: "pointer"
-            }}
-          >
-            Delete ❌
-          </button>
+          <>
+            {/* EDIT BUTTON */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onEdit(product.id);
+              }}
+              style={{
+                marginTop: "10px",
+                width: "100%",
+                padding: "10px",
+                background: "#2563eb",
+                color: "#fff",
+                border: "none",
+                borderRadius: "10px",
+                cursor: "pointer"
+              }}
+            >
+              Edit ✏️
+            </button>
+
+            {/* DELETE BUTTON */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onDelete(product.id);
+              }}
+              style={{
+                marginTop: "10px",
+                width: "100%",
+                padding: "10px",
+                background: "#ef4444",
+                color: "#fff",
+                border: "none",
+                borderRadius: "10px",
+                cursor: "pointer"
+              }}
+            >
+              Delete ❌
+            </button>
+          </>
 
         ) : (
 

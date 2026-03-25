@@ -13,8 +13,7 @@ function VendorProducts() {
 
     const fetchProducts = useCallback(async () => {
         try {
-            const res =
-                await api.get("/api/products/vendor/my-products");
+            const res = await api.get("/api/products/vendor/my-products");
             setProducts(res.data);
         } catch (err) {
             const status = err?.response?.status;
@@ -41,14 +40,13 @@ function VendorProducts() {
         fetchProducts();
     }, [fetchProducts]);
 
+    /* ✅ DELETE */
     const handleDelete = async (id) => {
 
         if (!window.confirm("Delete Product?")) return;
 
         try {
-            await api.delete(
-                `/api/products/vendor/delete/${id}`
-            );
+            await api.delete(`/api/products/vendor/delete/${id}`);
             alert("Deleted ✅");
             fetchProducts();
         } catch (err) {
@@ -58,9 +56,15 @@ function VendorProducts() {
                 (typeof err?.response?.data === "string" ? err.response.data : null) ||
                 err?.message ||
                 "Failed to delete product";
+
             setErrorMsg(msg);
             setErrorOpen(true);
         }
+    };
+
+    /* ✅ EDIT (NEW) */
+    const handleEdit = (id) => {
+        navigate(`/vendor/products/edit/${id}`);
     };
 
     return (
@@ -70,9 +74,7 @@ function VendorProducts() {
 
             {/* ADD PRODUCT BUTTON */}
             <button
-                onClick={() =>
-                    navigate("/vendor/products/add")
-                }
+                onClick={() => navigate("/vendor/products/add")}
                 style={{
                     marginBottom: "20px",
                     padding: "10px 15px",
@@ -83,7 +85,7 @@ function VendorProducts() {
                 ➕ Add Product
             </button>
 
-            {/* ✅ SWIGGY STYLE GRID */}
+            {/* PRODUCTS GRID */}
             <div
                 style={{
                     display: "flex",
@@ -98,12 +100,13 @@ function VendorProducts() {
                         product={p}
                         isVendor={true}
                         onDelete={handleDelete}
-                        onView={(id) => navigate(`/product/${id}`)}
+                        onEdit={handleEdit}   // ⭐ IMPORTANT FIX
                     />
                 ))}
 
             </div>
 
+            {/* ERROR */}
             <Snackbar
                 open={errorOpen}
                 autoHideDuration={4000}
