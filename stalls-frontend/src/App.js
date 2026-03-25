@@ -34,6 +34,7 @@ import VendorProducts from "./pages/VendorProducts";
 import VendorOrders from "./pages/VendorOrders";
 import VendorRevenue from "./pages/VendorRevenue";
 import VendorAddProduct from "./pages/VendorAddProduct";
+import VendorEditProduct from "./pages/VendorEditProduct";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -105,6 +106,7 @@ function App() {
           <Route path="stalls" element={<VendorStalls />} />
           <Route path="products" element={<VendorProducts />} />
           <Route path="products/add" element={<VendorAddProduct />} />
+          <Route path="products/edit/:id" element={<VendorEditProduct />} />
           <Route path="orders" element={<VendorOrders />} />
           <Route path="revenue" element={<VendorRevenue />} />
         </Route>
