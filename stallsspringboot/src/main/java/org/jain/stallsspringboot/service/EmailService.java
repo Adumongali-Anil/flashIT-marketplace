@@ -1,39 +1,46 @@
 package org.jain.stallsspringboot.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 @Service
 public class EmailService {
-
-    @Autowired
-    private JavaMailSender mailSender;
 
     public void sendOtp(String email, String otp) {
 
         try {
 
-            SimpleMailMessage message = new SimpleMailMessage();
+            URL url = new URL("https://api.brevo.com/v3/smtp/email");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-            message.setTo(email);
-            message.setSubject("🔐 flashIT Marketplace OTP Verification");
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("accept", "application/json");
+            conn.setRequestProperty("api-key", System.getenv("BREVO_API_KEY"));
+            conn.setRequestProperty("content-type", "application/json");
 
-            message.setText(
-                    "Hello User,\n\n" +
-                    "Your OTP is: " + otp + "\n\n" +
-                    "This OTP is valid for 5 minutes.\n\n" +
-                    "Do not share this OTP.\n\n" +
-                    "Regards,\nFlashIT Marketplace"
-            );
+            conn.setDoOutput(true);
 
-            mailSender.send(message);
+            String json = "{"
+                    + "\"sender\":{\"email\":\"adumongalianilkumar@gmail.com\",\"name\":\"FlashIT\"},"
+                    + "\"to\":[{\"email\":\"" + email + "\"}],"
+                    + "\"subject\":\"🔐 OTP Verification\","
+                    + "\"htmlContent\":\"<h2>Your OTP is: " + otp + "</h2><p>This OTP is valid for 5 minutes</p>\""
+                    + "}";
 
-            System.out.println("✅ OTP EMAIL SENT SUCCESSFULLY");
+            OutputStream os = conn.getOutputStream();
+            os.write(json.getBytes());
+            os.flush();
+            os.close();
+
+            int responseCode = conn.getResponseCode();
+
+            System.out.println("✅ Email API Response Code: " + responseCode);
 
         } catch (Exception e) {
-            System.out.println("❌ EMAIL FAILED");
+            System.out.println("❌ Email sending failed");
             e.printStackTrace();
         }
     }
