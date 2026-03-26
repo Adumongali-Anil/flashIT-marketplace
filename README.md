@@ -2,7 +2,7 @@
 
 A full-stack marketplace web application where customers can browse products, vendors can manage their products, and admins can control the platform.
 
----
+----
 
 ## 🌐 Live Demo
 👉 https://flash-it-marketplace-1fvnf0nkx-adumongali-anils-projects.vercel.app/
