@@ -5,9 +5,7 @@ function ProtectedRoute({ children, allowedRole }) {
 
   const token = localStorage.getItem("token");
 
-  if (!token) {
-    return <Navigate to="/" />;
-  }
+  if (!token) return <Navigate to="/" />;
 
   try {
     const payload = JSON.parse(atob(token.split(".")[1]));
@@ -16,11 +14,13 @@ function ProtectedRoute({ children, allowedRole }) {
       return <Navigate to="/" />;
     }
 
-  } catch (e) {
+    return children;
+
+  } catch (err) {
+    console.log("Invalid token");
+    localStorage.clear();
     return <Navigate to="/" />;
   }
-
-  return children;
 }
 
 export default ProtectedRoute;
