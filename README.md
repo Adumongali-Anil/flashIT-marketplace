@@ -82,3 +82,13 @@ flash-marketplace/
 ```bash
 git clone https://github.com/Adumongali-Anil/flash-it-marketplace.git
 cd flash-it-marketplace
+
+2️⃣ Frontend Setup
+cd stalls-frontend
+npm install
+npm start
+
+3️⃣ Backend Setup
+cd stalls-springboot
+mvn spring-boot:run
+
