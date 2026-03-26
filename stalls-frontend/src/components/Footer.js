@@ -24,7 +24,7 @@ function Footer() {
         >
 
             <Typography fontWeight="bold" fontSize="18px">
-                SAHASRA Marketplace
+                FLASHit Marketplace
             </Typography>
 
             <Box mt={1}>
