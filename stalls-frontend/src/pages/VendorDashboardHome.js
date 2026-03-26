@@ -146,7 +146,7 @@ function VendorDashboardHome() {
 
         {card(
           "Revenue",
-          `₹${stats.revenue}`,
+          `₹${stats.revenue|| 0}`,
           "linear-gradient(45deg,#ff512f,#dd2476)",
           "/vendor/revenue"
         )}
