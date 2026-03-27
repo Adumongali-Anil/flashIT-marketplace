@@ -52,9 +52,9 @@ function Login() {
         {/* 🔥 PREMIUM LOGO */}
         <FlashITPremiumLogo />
 
-        <Typography variant="h5" textAlign="center" mb={2} fontWeight="bold">
+        {/* <Typography variant="h5" textAlign="center" mb={2} fontWeight="bold">
           Welcome to FlashIT
-        </Typography>
+        </Typography> */}
 
         {/* <Typography textAlign="center" mb={3} color="text.secondary">
           Fast • Smart • Marketplace

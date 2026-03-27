@@ -24,11 +24,14 @@
 
 /* 🔥 Text */
 .text {
-  font-size: 36px;
+  font-size: 34px;
   font-weight: bold;
   margin-top: 8px;
-  color: white; /* ✅ solid visible text */
-  text-shadow: 0 0 10px rgba(0,0,0,0.4);
+  background: linear-gradient(90deg, #00c6ff, #0072ff, #ffcc00);
+  background-size: 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientMove 3s infinite linear;
 }
 
 /* Highlight IT */
@@ -40,10 +43,23 @@
 
 /* ✨ Tagline */
 .tagline {
-  font-size: 13px;
-  color: #ddd;
-  margin-top: 5px;
-  letter-spacing: 1px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 6px;
+  letter-spacing: 1.5px;
+
+  /* 🌈 Gradient Text */
+  background: linear-gradient(90deg, #00c6ff, #ffffff, #ffd700);
+  background-size: 200%;
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* ✨ Glow Effect */
+  text-shadow: 0 0 8px rgba(255,255,255,0.6);
+
+  /* 🔥 Animation */
+  animation: shine 3s linear infinite;
 }
 
 /* 🔥 Animations */
@@ -67,4 +83,19 @@
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shine {
+  0% {
+    background-position: 0%;
+    text-shadow: 0 0 5px rgba(255,255,255,0.4);
+  }
+  50% {
+    background-position: 100%;
+    text-shadow: 0 0 15px rgba(255,255,255,0.9);
+  }
+  100% {
+    background-position: 0%;
+    text-shadow: 0 0 5px rgba(255,255,255,0.4);
+  }
 }
