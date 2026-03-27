@@ -9,6 +9,7 @@ import {
 
 import api from "../services/api";
 import { useNavigate } from "react-router-dom";
+import FlashITPremiumLogo from "../components/FlashITPremiumLogo"; // ✅ ADD THIS
 
 function Login() {
 
@@ -46,16 +47,25 @@ function Login() {
 
     <Box sx={container}>
 
-      <Paper className="login-card" sx={card}>
+      <Paper className="login-card" sx={card} elevation={6}>
 
-        <Typography variant="h5" textAlign="center" mb={3} fontWeight="bold">
-          Marketplace Login
+        {/* 🔥 PREMIUM LOGO */}
+        <FlashITPremiumLogo />
+
+        <Typography variant="h5" textAlign="center" mb={2} fontWeight="bold">
+          Welcome to FlashIT
+        </Typography>
+
+        <Typography textAlign="center" mb={3} color="text.secondary">
+          Fast • Smart • Marketplace
         </Typography>
 
         <Box display="flex" flexDirection="column" gap={2}>
 
           <TextField
-            label="Username/Email"
+            label="Username / Email"
+            variant="outlined"
+            fullWidth
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
@@ -63,13 +73,21 @@ function Login() {
           <TextField
             label="Password"
             type="password"
+            variant="outlined"
+            fullWidth
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <Button variant="contained" onClick={handleLogin}>
+          <Button
+            variant="contained"
+            fullWidth
+            onClick={handleLogin}
+            sx={loginBtn}
+          >
             Login
           </Button>
+
           <Typography textAlign="center" mt={1}>
             <span
               style={{ color: "#2563eb", cursor: "pointer" }}
@@ -97,7 +115,7 @@ function Login() {
   );
 }
 
-/* STYLE */
+/* 🎨 STYLES */
 
 const container = {
   minHeight: "100vh",
@@ -110,7 +128,18 @@ const container = {
 const card = {
   p: 4,
   width: 400,
-  borderRadius: "16px"
+  borderRadius: "16px",
+  background: "rgba(255,255,255,0.95)",   // 🔥 glass effect
+  backdropFilter: "blur(10px)"
+};
+
+const loginBtn = {
+  mt: 1,
+  background: "linear-gradient(90deg,#2563eb,#1e3a8a)",
+  fontWeight: "bold",
+  "&:hover": {
+    background: "linear-gradient(90deg,#1e40af,#1e3a8a)"
+  }
 };
 
 const registerText = {

@@ -24,7 +24,7 @@ function Footer() {
         >
 
             <Typography fontWeight="bold" fontSize="18px">
-                FLASHit Marketplace
+                FlashIT Marketplace
             </Typography>
 
             <Box mt={1}>
@@ -40,7 +40,7 @@ function Footer() {
             </Box>
 
             <Typography mt={1} fontSize="14px">
-                📧 flashIT@gmail.com | 📞 9441311833
+                📧 FlashIT@gmail.com | 📞 9441311833
             </Typography>
 
             <Typography mt={1} fontSize="13px">
