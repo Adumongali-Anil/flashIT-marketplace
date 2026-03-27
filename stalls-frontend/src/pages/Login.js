@@ -56,9 +56,9 @@ function Login() {
           Welcome to FlashIT
         </Typography>
 
-        <Typography textAlign="center" mb={3} color="text.secondary">
+        {/* <Typography textAlign="center" mb={3} color="text.secondary">
           Fast • Smart • Marketplace
-        </Typography>
+        </Typography> */}
 
         <Box display="flex" flexDirection="column" gap={2}>
 
