@@ -46,20 +46,9 @@
   font-size: 14px;
   font-weight: 500;
   margin-top: 6px;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
 
-  /* 🌈 Gradient Text */
-  background: linear-gradient(90deg, #00c6ff, #ffffff, #ffd700);
-  background-size: 200%;
-
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  /* ✨ Glow Effect */
-  text-shadow: 0 0 8px rgba(255,255,255,0.6);
-
-  /* 🔥 Animation */
-  animation: shine 3s linear infinite;
+  color: #6b7280; /* clean grey */
 }
 
 /* 🔥 Animations */
