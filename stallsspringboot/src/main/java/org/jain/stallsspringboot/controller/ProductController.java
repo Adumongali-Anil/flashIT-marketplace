@@ -1,17 +1,20 @@
 package org.jain.stallsspringboot.controller;
 
 import org.jain.stallsspringboot.entity.Product;
-import java.nio.file.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.jain.stallsspringboot.entity.Stalls;
 import org.jain.stallsspringboot.repository.ProductRepository;
 import org.jain.stallsspringboot.repository.StallRepository;
 import org.jain.stallsspringboot.service.ProductService;
+
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/products")
@@ -22,12 +25,22 @@ public class ProductController {
 
     @Autowired
     private StallRepository stallRepository;
-    
+
     @Autowired
     private ProductService productService;
-    
-    
-    
+
+    @Autowired
+    private Cloudinary cloudinary;
+
+    // ================= UPLOAD METHOD =================
+    public String uploadImage(MultipartFile file) throws Exception {
+        Map uploadResult = cloudinary.uploader().upload(
+                file.getBytes(),
+                ObjectUtils.emptyMap()
+        );
+        return uploadResult.get("secure_url").toString();
+    }
+
     // ================= CREATE PRODUCT =================
     @PostMapping("/vendor/create/{stallId}")
     public Product createProduct(
@@ -39,26 +52,17 @@ public class ProductController {
             @RequestParam("image") MultipartFile file
     ) throws Exception {
 
-        String uploadDir = "uploads/";
+        String imageUrl = uploadImage(file);
 
-        String fileName =
-                System.currentTimeMillis() + "_" + file.getOriginalFilename();
+        Product product = productService.createProduct(
+                stallId,
+                name,
+                description,
+                price,
+                stock
+        );
 
-        Path path = Paths.get(uploadDir + fileName);
-
-        Files.copy(file.getInputStream(), path,
-                StandardCopyOption.REPLACE_EXISTING);
-
-        Product product =
-                productService.createProduct(
-                        stallId,
-                        name,
-                        description,
-                        price,
-                        stock
-                );
-
-        product.setImageUrl(fileName);
+        product.setImageUrl(imageUrl);
 
         return productRepository.save(product);
     }
@@ -66,11 +70,8 @@ public class ProductController {
     // ================= VENDOR PRODUCTS =================
     @GetMapping("/vendor/my-products")
     public List<Product> getMyProducts(Authentication authentication) {
-
         String username = authentication.getName();
-
-        return productRepository
-                .findByStallUserUsernameAndActiveTrue(username);
+        return productRepository.findByStallUserUsernameAndActiveTrue(username);
     }
 
     // ================= CUSTOMER PRODUCTS =================
@@ -78,33 +79,8 @@ public class ProductController {
     public List<Product> getAllProducts() {
         return productRepository.findByActiveTrue();
     }
- // ================= GET SINGLE PRODUCT (VENDOR EDIT) =================
-    @GetMapping("/vendor/{id}")
-    public Product getVendorProduct(
-            @PathVariable Long id,
-            Authentication authentication
-    ) {
 
-        Product product = productRepository.findById(id)
-                .orElseThrow(() ->
-                        new RuntimeException("Product not found"));
-
-        String username = authentication.getName();
-
-        // ✅ security check
-        if (!product.getStall()
-                .getUser()
-                .getUsername()
-                .equals(username)) {
-
-            throw new RuntimeException("Not allowed");
-        }
-
-        return product;
-    }
-    
- // ================= UPDATE PRODUCT =================
- // ================= UPDATE PRODUCT (WITH IMAGE) =================
+    // ================= UPDATE PRODUCT =================
     @PutMapping("/vendor/update/{id}")
     public Product updateProduct(
             @PathVariable Long id,
@@ -121,7 +97,6 @@ public class ProductController {
 
         String username = authentication.getName();
 
-        // SECURITY CHECK
         if (!product.getStall().getUser().getUsername().equals(username)) {
             throw new RuntimeException("Not allowed");
         }
@@ -131,42 +106,29 @@ public class ProductController {
         product.setPrice(price);
         product.setStock(stock);
 
-        // If new image uploaded
         if (file != null && !file.isEmpty()) {
-
-            String uploadDir = "uploads/";
-            String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-
-            Path path = Paths.get(uploadDir + fileName);
-            Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-
-            product.setImageUrl(fileName);
+            String imageUrl = uploadImage(file);
+            product.setImageUrl(imageUrl);
         }
 
         return productRepository.save(product);
     }
-    
+
     @GetMapping("/{id}")
     public Product getProductById(@PathVariable Long id) {
-
         return productRepository.findById(id)
-                .orElseThrow(() ->
-                        new RuntimeException("Product not found"));
+                .orElseThrow(() -> new RuntimeException("Product not found"));
     }
-    
-    
 
-    // ================= SOFT DELETE =================
+    // ================= DELETE =================
     @DeleteMapping("/vendor/delete/{id}")
-    public String deleteProduct(@PathVariable Long id,
-                                Authentication authentication) {
+    public String deleteProduct(@PathVariable Long id, Authentication authentication) {
 
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
 
         String username = authentication.getName();
 
-        // Only stall owner can delete
         if (!product.getStall().getUser().getUsername().equals(username)) {
             throw new RuntimeException("Not allowed");
         }
