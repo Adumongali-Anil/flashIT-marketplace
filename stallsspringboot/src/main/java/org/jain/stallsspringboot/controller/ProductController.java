@@ -38,6 +38,7 @@ public class ProductController {
                 file.getBytes(),
                 ObjectUtils.emptyMap()
         );
+        System.out.println(uploadResult); // ADD THIS LINE
         return uploadResult.get("secure_url").toString();
     }
 
