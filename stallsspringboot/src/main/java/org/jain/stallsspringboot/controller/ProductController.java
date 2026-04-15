@@ -121,6 +121,31 @@ public class ProductController {
                 .orElseThrow(() -> new RuntimeException("Product not found"));
     }
 
+    // ================= GET SINGLE PRODUCT (VENDOR EDIT) =================
+@GetMapping("/vendor/{id}")
+public Product getVendorProduct(
+        @PathVariable Long id,
+        Authentication authentication
+) {
+
+    Product product = productRepository.findById(id)
+            .orElseThrow(() ->
+                    new RuntimeException("Product not found"));
+
+    String username = authentication.getName();
+
+    // SECURITY CHECK
+    if (!product.getStall()
+            .getUser()
+            .getUsername()
+            .equals(username)) {
+
+        throw new RuntimeException("Not allowed");
+    }
+
+    return product;
+}
+
     // ================= DELETE =================
     @DeleteMapping("/vendor/delete/{id}")
     public String deleteProduct(@PathVariable Long id, Authentication authentication) {
