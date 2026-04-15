@@ -73,7 +73,7 @@ function ProductDetails() {
 
         {/* IMAGE */}
         <img
-          src={`https://flashit-marketplace.onrender.com/uploads/${product.imageUrl}`}
+          src={product.imageUrl}
           alt=""
           style={image}
           onMouseEnter={e => e.target.style.transform = "scale(1.2)"}

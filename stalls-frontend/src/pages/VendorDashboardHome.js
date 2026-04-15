@@ -233,7 +233,7 @@ function VendorDashboardHome() {
                 }}>
 
                   <img
-                    src={`https://flashit-marketplace.onrender.com/uploads/${p.imageUrl}`}
+                    src={p.imageUrl}
                     width="50"
                     height="50"
                     style={{

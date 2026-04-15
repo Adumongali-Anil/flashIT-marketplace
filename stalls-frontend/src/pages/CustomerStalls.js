@@ -56,7 +56,7 @@ e.currentTarget.style.boxShadow="0 4px 15px rgba(0,0,0,0.1)";
 >
 
 <img
-src={`https://flashit-marketplace.onrender.com/uploads/${s.imageUrl}`}
+src={s.imageUrl}
 alt=""
 style={{
 width:"100%",

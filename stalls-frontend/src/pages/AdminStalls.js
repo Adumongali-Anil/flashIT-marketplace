@@ -62,7 +62,7 @@ function AdminStalls() {
                 height="160"
                 image={
                   stall.imageUrl
-                  ? `https://flashit-marketplace.onrender.com/uploads/${stall.imageUrl}`
+                  ? stall.imageUrl
                   : "https://picsum.photos/400/200"
                 }
               />

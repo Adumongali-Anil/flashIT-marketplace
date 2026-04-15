@@ -60,7 +60,7 @@ transition:"0.3s"
 >
 
 <img
-src={`https://flashit-marketplace.onrender.com/uploads/${item.product.imageUrl}`}
+src={item.product.imageUrl}
 alt=""
 style={{
 width:"100%",

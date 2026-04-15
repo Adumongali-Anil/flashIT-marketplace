@@ -34,7 +34,7 @@ function ProductCard({ product, onAdd, onDelete, isVendor }) {
       <img
         src={
           product.imageUrl
-            ? `https://flashit-marketplace.onrender.com/uploads/${product.imageUrl}`
+            ? product.imageUrl
             : "https://picsum.photos/400/200"
         }
         alt="product"
