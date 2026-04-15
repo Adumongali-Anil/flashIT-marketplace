@@ -14,8 +14,8 @@ import org.jain.stallsspringboot.security.JwtUtil;
 import org.jain.stallsspringboot.service.EmailService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationException;
-import org.springframework.security.authentication.*;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
