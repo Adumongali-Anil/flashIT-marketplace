@@ -106,6 +106,21 @@ window.location.href="/orders";
 
 },
 
+method: {
+  netbanking: true,
+  card: true,
+  upi: true,
+  wallet: true,
+  emi: true,
+  paylater: true
+},
+
+prefill: {
+  name: localStorage.getItem("username") || "Customer",
+  email: localStorage.getItem("email") || "",
+  contact: localStorage.getItem("phone") || ""
+},
+
 theme:{
 color:"#1976d2"
 }

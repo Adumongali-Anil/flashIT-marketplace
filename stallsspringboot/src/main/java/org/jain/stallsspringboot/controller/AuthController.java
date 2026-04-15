@@ -178,15 +178,19 @@ public class AuthController {
                 );
 
         if(user == null){
-            throw new RuntimeException("User not found");
+            throw new RuntimeException("Username or password is wrong");
         }
 
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        user.getUsername(), // always use username internally
-                        request.getPassword()
-                )
-        );
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            user.getUsername(), // always use username internally
+                            request.getPassword()
+                    )
+            );
+        } catch (AuthenticationException ex) {
+            throw new RuntimeException("Username or password is wrong");
+        }
 
         String token = jwtUtil.generateToken(user);
 

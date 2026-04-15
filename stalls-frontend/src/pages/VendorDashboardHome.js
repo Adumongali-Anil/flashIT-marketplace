@@ -41,14 +41,18 @@ function VendorDashboardHome() {
       const productsRes =
         await api.get("/api/products/vendor/my-products");
 
+      const revenueRes =
+        await api.get("/api/orders/vendor-revenue");
+
       const stalls = stallsRes.data || [];
       const products = productsRes.data || [];
+      const revenueData = revenueRes.data || {};
 
       setStats({
         stalls: stalls.length,
         products: products.length,
-        orders: 12,
-        revenue: 2450
+        orders: revenueData.totalOrders || 0,
+        revenue: revenueData.totalRevenue || 0
       });
 
       setChartData([

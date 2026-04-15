@@ -39,7 +39,10 @@ function Login() {
         navigate("/shop");
 
     } catch (err) {
-      alert("Login Failed");
+      const message =
+        err?.response?.data?.message ||
+        "Username or password is wrong";
+      alert(message);
     }
   };
 

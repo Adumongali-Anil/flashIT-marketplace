@@ -28,9 +28,19 @@ window.location.href="/orders";
 
 },
 
+method: {
+  netbanking: true,
+  card: true,
+  upi: true,
+  wallet: true,
+  emi: true,
+  paylater: true
+},
+
 prefill:{
 name:"Customer",
-email:"test@test.com"
+email:"test@test.com",
+contact: localStorage.getItem("phone") || ""
 },
 
 theme:{
