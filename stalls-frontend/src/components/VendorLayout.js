@@ -36,14 +36,15 @@ function VendorLayout() {
         {/* SIDEBAR */}
         <VendorSidebar open={open} />
 
-        {/* CONTENT */}
+        {/* CONTENT - RESPONSIVE */}
         <Box
           sx={{
             flexGrow: 1,
             mt: "64px",
-            ml: open ? `${drawerWidth}px` : "0px",
+            ml: { xs: "0px", lg: open ? `${drawerWidth}px` : "0px" },
             transition: "0.3s",
-            p: 3
+            p: { xs: "10px", sm: "15px", md: "20px" },
+            width: { xs: "100%", lg: "auto" }
           }}
         >
           <Outlet />

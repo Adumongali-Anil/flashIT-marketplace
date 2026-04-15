@@ -120,9 +120,11 @@ rzp.open();
 
 return(
 
-<div style={{padding:"20px"}}>
+<div style={{
+  padding:"10px"
+}}>
 
-<h2 style={{marginBottom:"20px"}}>My Cart</h2>
+<h2 className="responsive-h2" style={{marginBottom:"20px"}}>My Cart</h2>
 
 {/* ⭐ CART EMPTY UI */}
 
@@ -131,7 +133,7 @@ return(
 <Box
 sx={{
 textAlign:"center",
-marginTop:"80px"
+marginTop:{xs:"40px", sm:"60px", md:"80px"}
 }}
 >
 
@@ -169,7 +171,7 @@ Browse Products
 
 <>
 
-<Grid container spacing={3}>
+<Grid container spacing={{xs:1.5, sm:2, md:3}}>
 
 {cart.map(c=>(
 
@@ -194,7 +196,7 @@ boxShadow:"0 15px 35px rgba(0,0,0,0.25)"
 component="img"
 image={c.product.imageUrl}
 sx={{
-height:180,
+height:{xs:140, sm:160, md:180},
 objectFit:"cover"
 }}
 />
@@ -269,17 +271,19 @@ Remove
 
 <Box
 sx={{
-mt:4,
-p:3,
+mt:3,
+p:{xs:2, sm:3},
 borderRadius:"15px",
 boxShadow:"0 4px 15px rgba(0,0,0,0.1)",
 display:"flex",
+flexDirection:{xs:"column", sm:"row"},
 justifyContent:"space-between",
-alignItems:"center"
+alignItems:{xs:"stretch", sm:"center"},
+gap:2
 }}
 >
 
-<Typography variant="h6">
+<Typography variant="h6" sx={{fontSize:{xs:"16px", sm:"18px"}}}>
 Total: ₹{totalPrice}
 </Typography>
 
@@ -288,6 +292,10 @@ variant="contained"
 color="success"
 size="large"
 onClick={handlePayment}
+sx={{
+  width:{xs:"100%", sm:"auto"},
+  fontSize:{xs:"14px", sm:"16px"}
+}}
 >
 Pay ₹{totalPrice}
 </Button>

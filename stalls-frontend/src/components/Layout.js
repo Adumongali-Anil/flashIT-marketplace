@@ -36,14 +36,15 @@ function Layout() {
         {/* SIDEBAR */}
         <Sidebar open={open} setOpen={setOpen} />
 
-        {/* CONTENT */}
+        {/* CONTENT - RESPONSIVE */}
         <Box
           sx={{
             flexGrow: 1,
             mt: "64px",
-            ml: open ? `${drawerWidth}px` : "0px",
+            ml: { xs: "0px", lg: open ? `${drawerWidth}px` : "0px" },
             transition: "all 0.35s ease",
-            p: 4
+            p: { xs: "10px", sm: "15px", md: "20px" },
+            width: { xs: "100%", lg: "auto" }
           }}
         >
           <Outlet />

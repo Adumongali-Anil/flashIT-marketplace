@@ -153,20 +153,21 @@ function VendorStalls() {
   };
 
   return(
-    <div style={{padding:"30px"}}>
+    <div style={{padding:"10px"}}>
 
 {/* ================= FORM ================= */}
 
 <div ref={formRef} style={createCard}>
 
-<h2>{editingId?"Edit Stall":"Add Stall"}</h2>
+<h2 className="responsive-h2">{editingId?"Edit Stall":"Add Stall"}</h2>
 
 <input
 name="name"
 placeholder="Stall Name"
 value={form.name}
 onChange={handleChange}
-style={input}
+className="responsive-input"
+style={{marginBottom:"10px"}}
 />
 
 <input
@@ -174,7 +175,8 @@ name="description"
 placeholder="Description"
 value={form.description}
 onChange={handleChange}
-style={input}
+className="responsive-input"
+style={{marginBottom:"10px"}}
 />
 
 <input
@@ -182,17 +184,19 @@ name="location"
 placeholder="Location"
 value={form.location}
 onChange={handleChange}
-style={input}
+className="responsive-input"
+style={{marginBottom:"10px"}}
 />
 
-<input type="file" onChange={handleImage}/>
+<input type="file" onChange={handleImage} className="responsive-input"/>
 
 {preview &&(
 <img src={preview} alt="" style={previewImg}/>
 )}
 
 <button
-style={mainBtn}
+className="responsive-button"
+style={{marginTop:"10px"}}
 onClick={editingId?updateStall:createStall}
 >
 {editingId?"Update Stall":"Create Stall"}
@@ -202,7 +206,7 @@ onClick={editingId?updateStall:createStall}
 
 {/* ================= GRID ================= */}
 
-<h2 style={{marginTop:40}}>My Stalls</h2>
+<h2 className="responsive-h2" style={{marginTop:20}}>My Stalls</h2>
 
 <div style={grid}>
 
@@ -233,9 +237,9 @@ onMouseEnter={e=>e.target.style.transform="scale(1.1)"}
 onMouseLeave={e=>e.target.style.transform="scale(1)"}
 />
 
-<div style={{padding:15}}>
-<h3>{stall.name}</h3>
-<p>📍 {stall.location}</p>
+<div style={{padding:"10px"}}>
+<h3 style={{fontSize:"16px", margin:"8px 0"}}>{stall.name}</h3>
+<p style={{margin:"5px 0", fontSize:"13px"}}>📍 {stall.location}</p>
 
 <div style={actionBox}>
 
@@ -269,10 +273,11 @@ Delete
 
 const createCard={
 background:"#fff",
-padding:"25px",
+padding:"15px",
 borderRadius:"14px",
 boxShadow:"0 6px 20px rgba(0,0,0,0.1)",
-maxWidth:"500px"
+maxWidth:"100%",
+marginBottom:"20px"
 };
 
 const input={
@@ -302,8 +307,8 @@ cursor:"pointer"
 
 const grid={
 display:"grid",
-gridTemplateColumns:"repeat(auto-fill,minmax(280px,1fr))",
-gap:"25px"
+gridTemplateColumns:"repeat(auto-fill,minmax(200px,1fr))",
+gap:"12px"
 };
 
 const stallCard={
@@ -316,15 +321,15 @@ boxShadow:"0 8px 25px rgba(0,0,0,0.12)"
 
 const stallImage={
 width:"100%",
-height:"180px",
+height:"150px",
 objectFit:"cover",
 transition:"transform .5s ease"
 };
 
 const actionBox={
 display:"flex",
-gap:"10px",
-marginTop:"10px"
+gap:"8px",
+marginTop:"8px"
 };
 
 const editBtn={
@@ -332,10 +337,11 @@ flex:1,
 background:"#2563eb",
 color:"#fff",
 border:"none",
-padding:"10px",
-borderRadius:"10px",
+padding:"8px",
+borderRadius:"8px",
 cursor:"pointer",
-transition:"0.3s"
+transition:"0.3s",
+fontSize:"13px"
 };
 
 const deleteBtn={
@@ -343,10 +349,11 @@ flex:1,
 background:"#ef4444",
 color:"#fff",
 border:"none",
-padding:"10px",
-borderRadius:"10px",
+padding:"8px",
+borderRadius:"8px",
 cursor:"pointer",
-transition:"0.3s"
+transition:"0.3s",
+fontSize:"13px"
 };
 
 export default VendorStalls;

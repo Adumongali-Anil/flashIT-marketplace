@@ -64,9 +64,11 @@ setFiltered(filteredProducts);
 
 return(
 
-<div style={{padding:"20px"}}>
+<div style={{
+  padding:"10px"
+}}>
 
-<h2>Shop</h2>
+<h2 className="responsive-h2">Shop</h2>
 
 {/* 🔍 SEARCH BAR */}
 
@@ -77,23 +79,17 @@ fullWidth
 value={search}
 onChange={handleSearch}
 style={{
-marginTop:"15px",
-marginBottom:"25px",
+marginTop:"10px",
+marginBottom:"20px",
 background:"#fff",
 borderRadius:"10px"
 }}
 />
 
 
-{/* PRODUCT GRID */}
+{/* PRODUCT GRID - RESPONSIVE */}
 
-<div
-style={{
-display:"grid",
-gridTemplateColumns:"repeat(auto-fill,minmax(250px,1fr))",
-gap:"25px"
-}}
->
+<div className="product-grid-mobile">
 
 {filtered.map(p=>(
 

@@ -29,14 +29,16 @@ function CustomerLayout() {
         {/* SIDEBAR */}
         <CustomerSidebar open={open} />
 
-        {/* CONTENT */}
+        {/* CONTENT - RESPONSIVE */}
         <Box
           sx={{
             flexGrow: 1,
             mt: "64px",
-            ml: open ? `${drawerWidth}px` : "0px",
-            p: 4,
-            background: "#f1f5f9"
+            ml: { xs: "0px", lg: open ? `${drawerWidth}px` : "0px" },
+            p: { xs: "10px", sm: "15px", md: "20px" },
+            background: "#f1f5f9",
+            width: { xs: "100%", lg: "auto" },
+            transition: "all 0.35s ease"
           }}
         >
           <Outlet />

@@ -19,18 +19,11 @@ setStalls(res.data);
 
 return(
 
-<div style={{padding:"20px"}}>
+<div style={{padding:"10px"}}>
 
-<h2>Stalls</h2>
+<h2 className="responsive-h2">Stalls</h2>
 
-<div
-style={{
-display:"grid",
-gridTemplateColumns:"repeat(auto-fill,minmax(250px,1fr))",
-gap:"25px",
-marginTop:"20px"
-}}
->
+<div className="product-grid-mobile" style={{marginTop:"15px"}}>
 
 {stalls.map(s=>(
 
@@ -65,11 +58,16 @@ objectFit:"cover"
 }}
 />
 
-<div style={{padding:"15px"}}>
+<div style={{padding:"12px"}}>
 
-<h3>{s.name}</h3>
+<h3 style={{fontSize:"16px", margin:"8px 0"}}>{s.name}</h3>
 
-<p style={{color:"gray"}}>
+<p style={{
+  color:"gray",
+  fontSize:"13px",
+  margin:"5px 0",
+  lineHeight:"1.4"
+}}>
 {s.description}
 </p>
 

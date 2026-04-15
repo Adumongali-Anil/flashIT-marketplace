@@ -68,31 +68,23 @@ function VendorProducts() {
     };
 
     return (
-        <div style={{ padding: "20px" }}>
+        <div style={{ padding: "10px" }}>
 
-            <h2>My Products</h2>
+            <h2 className="responsive-h2">My Products</h2>
 
             {/* ADD PRODUCT BUTTON */}
             <button
                 onClick={() => navigate("/vendor/products/add")}
+                className="responsive-button"
                 style={{
-                    marginBottom: "20px",
-                    padding: "10px 15px",
-                    borderRadius: "8px",
-                    cursor: "pointer"
+                    marginBottom: "20px"
                 }}
             >
                 ➕ Add Product
             </button>
 
-            {/* PRODUCTS GRID */}
-            <div
-                style={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    gap: "25px"
-                }}
-            >
+            {/* PRODUCTS GRID - RESPONSIVE */}
+            <div className="product-grid-mobile">
 
                 {products.map(p => (
                     <ProductCard

@@ -1,6 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+/* RESPONSIVE CSS */
+import "./responsive.css";
+
 /* PAGES */
 import Login from "./pages/Login";
 import Register from "./pages/Register";

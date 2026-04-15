@@ -1,0 +1,616 @@
+/* ╔═══════════════════════════════════════════════════════════════════╗
+   ║              RESPONSIVE DESIGN SYSTEM                             ║
+   ║   Mobile First Approach: Mobile < Tablet < Desktop               ║
+   ╚═══════════════════════════════════════════════════════════════════╝ */
+
+/* 📱 MOBILE BREAKPOINTS */
+/* Mobile: 320px - 599px */
+/* Tablet: 600px - 1023px */
+/* Desktop: 1024px + */
+
+/* ═════════════════════════════════════════════════════════════════ */
+/*  RESPONSIVE GRID SYSTEM                                           */
+/* ═════════════════════════════════════════════════════════════════ */
+
+.responsive-grid {
+  display: grid;
+  gap: 15px;
+  width: 100%;
+}
+
+/* Mobile: 1 column */
+@media (max-width: 599px) {
+  .responsive-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 10px;
+  }
+}
+
+/* Tablet: 2 columns */
+@media (min-width: 600px) and (max-width: 1023px) {
+  .responsive-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 15px;
+  }
+}
+
+/* Desktop: 3+ columns */
+@media (min-width: 1024px) {
+  .responsive-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+}
+
+/* ═════════════════════════════════════════════════════════════════ */
+/*  RESPONSIVE SPACING                                               */
+/* ═════════════════════════════════════════════════════════════════ */
+
+.responsive-padding {
+  padding: 10px;
+}
+
+@media (min-width: 600px) {
+  .responsive-padding {
+    padding: 15px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-padding {
+    padding: 20px;
+  }
+}
+
+/* ═════════════════════════════════════════════════════════════════ */
+/*  RESPONSIVE TYPOGRAPHY                                            */
+/* ═════════════════════════════════════════════════════════════════ */
+
+.responsive-h1 {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 15px 0;
+}
+
+@media (min-width: 600px) {
+  .responsive-h1 {
+    font-size: 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-h1 {
+    font-size: 40px;
+  }
+}
+
+.responsive-h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 12px 0;
+}
+
+@media (min-width: 600px) {
+  .responsive-h2 {
+    font-size: 28px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-h2 {
+    font-size: 32px;
+  }
+}
+
+.responsive-h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 10px 0;
+}
+
+@media (min-width: 600px) {
+  .responsive-h3 {
+    font-size: 22px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-h3 {
+    font-size: 26px;
+  }
+}
+
+.responsive-text {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+@media (min-width: 600px) {
+  .responsive-text {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-text {
+    font-size: 16px;
+  }
+}
+
+/* ═════════════════════════════════════════════════════════════════ */
+/*  RESPONSIVE LAYOUT - FLEX CONTAINER                               */
+/* ═════════════════════════════════════════════════════════════════ */
+
+.responsive-flex-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .responsive-flex-container {
+    flex-direction: row;
+  }
+}
+
+/* ═════════════════════════════════════════════════════════════════ */
+/*  RESPONSIVE SIDEBAR                                               */
+/* ═════════════════════════════════════════════════════════════════ */
+
+.responsive-sidebar-container {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  margin-top: 64px;
+}
+
+@media (min-width: 1024px) {
+  .responsive-sidebar-container {
+    flex-direction: row;
+  }
+}
+
+.responsive-content {
+  flex-grow: 1;
+  width: 100%;
+  padding: 10px;
+  background: #f1f5f9;
+  transition: all 0.35s ease;
+}
+
+@media (min-width: 600px) {
+  .responsive-content {
+    padding: 15px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-content {
+    padding: 20px;
+    margin-left: 250px;
+  }
+}
+
+/* ═════════════════════════════════════════════════════════════════ */
+/*  RESPONSIVE CARD                                                   */
+/* ═════════════════════════════════════════════════════════════════ */
+
+.responsive-card {
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  padding: 12px;
+}
+
+@media (min-width: 600px) {
+  .responsive-card {
+    padding: 15px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-card {
+    padding: 16px;
+  }
+}
+
+.responsive-card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* ═════════════════════════════════════════════════════════════════ */
+/*  RESPONSIVE BUTTON                                                 */
+/* ═════════════════════════════════════════════════════════════════ */
+
+.responsive-button {
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+@media (min-width: 600px) {
+  .responsive-button {
+    padding: 12px 20px;
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-button {
+    padding: 12px 25px;
+    font-size: 16px;
+  }
+}
+
+.responsive-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+/* ═════════════════════════════════════════════════════════════════ */
+/*  RESPONSIVE INPUT                                                  */
+/* ═════════════════════════════════════════════════════════════════ */
+
+.responsive-input {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: white;
+  color: #000;
+  box-sizing: border-box;
+}
+
+@media (min-width: 600px) {
+  .responsive-input {
+    padding: 12px 16px;
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-input {
+    padding: 12px 18px;
+    font-size: 16px;
+  }
+}
+
+.responsive-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* ═════════════════════════════════════════════════════════════════ */
+/*  RESPONSIVE TABLE                                                  */
+/* ═════════════════════════════════════════════════════════════════ */
+
+.responsive-table {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 12px;
+}
+
+.responsive-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+@media (min-width: 600px) {
+  .responsive-table table {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-table table {
+    font-size: 16px;
+  }
+}
+
+.responsive-table th,
+.responsive-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+@media (min-width: 600px) {
+  .responsive-table th,
+  .responsive-table td {
+    padding: 15px;
+  }
+}
+
+.responsive-table th {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  font-weight: 600;
+}
+
+.responsive-table tr:hover {
+  background: #f8f9fa;
+}
+
+/* ═════════════════════════════════════════════════════════════════ */
+/*  RESPONSIVE IMAGE                                                  */
+/* ═════════════════════════════════════════════════════════════════ */
+
+.responsive-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* ═════════════════════════════════════════════════════════════════ */
+/*  HIDE/SHOW ELEMENTS BASED ON SCREEN SIZE                          */
+/* ═════════════════════════════════════════════════════════════════ */
+
+.hide-mobile {
+  display: none;
+}
+
+@media (min-width: 600px) {
+  .hide-mobile {
+    display: block;
+  }
+}
+
+.hide-tablet {
+  display: block;
+}
+
+@media (min-width: 600px) and (max-width: 1023px) {
+  .hide-tablet {
+    display: none;
+  }
+}
+
+.hide-desktop {
+  display: block;
+}
+
+@media (min-width: 1024px) {
+  .hide-desktop {
+    display: none;
+  }
+}
+
+.show-mobile {
+  display: block;
+}
+
+@media (min-width: 600px) {
+  .show-mobile {
+    display: none;
+  }
+}
+
+.show-desktop {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .show-desktop {
+    display: block;
+  }
+}
+
+/* ═════════════════════════════════════════════════════════════════ */
+/*  RESPONSIVE DRAWER/SIDEBAR - MOBILE SPECIFIC                      */
+/* ═════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1023px) {
+  .responsive-drawer {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1200;
+  }
+}
+
+/* ═════════════════════════════════════════════════════════════════ */
+/*  RESPONSIVE FORM                                                   */
+/* ═════════════════════════════════════════════════════════════════ */
+
+.responsive-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  .responsive-form {
+    gap: 18px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-form {
+    gap: 20px;
+  }
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+@media (min-width: 600px) {
+  .form-row {
+    flex-direction: row;
+    gap: 15px;
+  }
+}
+
+.form-row > * {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ═════════════════════════════════════════════════════════════════ */
+/*  RESPONSIVE PRODUCT GRID VARIATIONS                                */
+/* ═════════════════════════════════════════════════════════════════ */
+
+.product-grid-mobile {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 600px) {
+  .product-grid-mobile {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .product-grid-mobile {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+}
+
+/* ═════════════════════════════════════════════════════════════════ */
+/*  RESPONSIVE MARGIN/PADDING UTILITIES                               */
+/* ═════════════════════════════════════════════════════════════════ */
+
+.m-auto {
+  margin: auto;
+}
+
+.mb-sm {
+  margin-bottom: 10px;
+}
+
+@media (min-width: 600px) {
+  .mb-sm {
+    margin-bottom: 15px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mb-sm {
+    margin-bottom: 20px;
+  }
+}
+
+.mt-sm {
+  margin-top: 10px;
+}
+
+@media (min-width: 600px) {
+  .mt-sm {
+    margin-top: 15px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mt-sm {
+    margin-top: 20px;
+  }
+}
+
+/* ═════════════════════════════════════════════════════════════════ */
+/*  RESPONSIVE HEADER ADJUSTMENT                                      */
+/* ═════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 599px) {
+  /* Make header more compact on mobile */
+  .MuiAppBar-root {
+    padding: 8px 0 !important;
+  }
+
+  .MuiToolbar-root {
+    padding: 8px 12px !important;
+    min-height: 56px !important;
+  }
+}
+
+@media (min-width: 600px) {
+  .MuiAppBar-root {
+    padding: 0 !important;
+  }
+
+  .MuiToolbar-root {
+    padding: 0 16px !important;
+    min-height: 64px !important;
+  }
+}
+
+/* ═════════════════════════════════════════════════════════════════ */
+/*  RESPONSIVE OVERFLOW HANDLING                                      */
+/* ═════════════════════════════════════════════════════════════════ */
+
+.word-break {
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.text-truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ═════════════════════════════════════════════════════════════════ */
+/*  RESPONSIVE FOOTER                                                 */
+/* ═════════════════════════════════════════════════════════════════ */
+
+.responsive-footer {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  padding: 20px;
+  background: #0f172a;
+  color: white;
+  text-align: center;
+}
+
+@media (min-width: 600px) {
+  .responsive-footer {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    text-align: left;
+    padding: 30px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-footer {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    padding: 40px;
+  }
+}
+
+/* ═════════════════════════════════════════════════════════════════ */
+/*  PRINT STYLES                                                      */
+/* ═════════════════════════════════════════════════════════════════ */
+
+@media print {
+  .no-print {
+    display: none;
+  }
+
+  body {
+    font-size: 12pt;
+  }
+}
