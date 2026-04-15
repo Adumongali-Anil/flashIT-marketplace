@@ -280,29 +280,12 @@ maxWidth:"100%",
 marginBottom:"20px"
 };
 
-const input={
-width:"100%",
-padding:"10px",
-marginBottom:"10px"
-};
-
 const previewImg={
 width:"100%",
 height:"150px",
 objectFit:"cover",
 marginTop:"10px",
 borderRadius:"10px"
-};
-
-const mainBtn={
-width:"100%",
-padding:"12px",
-background:"#2563eb",
-color:"#fff",
-border:"none",
-borderRadius:"10px",
-marginTop:"10px",
-cursor:"pointer"
 };
 
 const grid={
