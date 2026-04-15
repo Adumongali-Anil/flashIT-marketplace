@@ -27,7 +27,7 @@ function CustomerLayout() {
       <Box sx={{ display: "flex", flex: 1 }}>
 
         {/* SIDEBAR */}
-        <CustomerSidebar open={open} />
+        <CustomerSidebar open={open} setOpen={setOpen} />
 
         {/* CONTENT - RESPONSIVE */}
         <Box

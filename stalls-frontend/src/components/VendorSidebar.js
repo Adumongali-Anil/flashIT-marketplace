@@ -7,7 +7,7 @@ import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import { useNavigate, useLocation } from "react-router-dom";
 
-function VendorSidebar({ open }) {
+function VendorSidebar({ open, setOpen }) {
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -19,6 +19,11 @@ function VendorSidebar({ open }) {
     { name: "Orders", icon: <ShoppingBagIcon />, path: "/vendor/orders" },
     { name: "Revenue", icon: <CurrencyRupeeIcon />, path: "/vendor/revenue" },
   ];
+
+  const handleNavigation = (path) => {
+    navigate(path);
+    setOpen(false); // ✅ Close sidebar on mobile after click
+  };
 
   return (
     <Box
@@ -41,7 +46,7 @@ function VendorSidebar({ open }) {
       {menu.map((item) => (
         <Box
           key={item.name}
-          onClick={() => navigate(item.path)}
+          onClick={() => handleNavigation(item.path)}
           sx={{
             display: "flex",
             gap: 2,

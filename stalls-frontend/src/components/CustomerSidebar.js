@@ -17,7 +17,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 const drawerWidth = 250;
 
-function CustomerSidebar({ open }) {
+function CustomerSidebar({ open, setOpen }) {
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -28,6 +28,11 @@ function CustomerSidebar({ open }) {
     { name: "Orders", icon: <ReceiptIcon />, path: "/orders" },
     // { name: "Payments", icon: <PaymentIcon />, path: "/payments" }
   ];
+
+  const handleNavigation = (path) => {
+    navigate(path);
+    setOpen(false); // ✅ Close sidebar on mobile after click
+  };
 
   return (
     <Drawer
@@ -52,7 +57,7 @@ function CustomerSidebar({ open }) {
           return (
             <ListItemButton
               key={menu.name}
-              onClick={() => navigate(menu.path)}
+              onClick={() => handleNavigation(menu.path)}
               sx={{
                 mx: 2,
                 my: 1,

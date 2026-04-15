@@ -34,7 +34,7 @@ function VendorLayout() {
       <Box sx={{ display: "flex", flex: 1 }}>
 
         {/* SIDEBAR */}
-        <VendorSidebar open={open} />
+        <VendorSidebar open={open} setOpen={setOpen} />
 
         {/* CONTENT - RESPONSIVE */}
         <Box
