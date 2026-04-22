@@ -5,7 +5,7 @@ A full-stack marketplace web application where customers can browse products, ve
 ----
 
 ## 🌐 Live Demo
-👉https://flash-it-marketplace-lwe1u4kjo-adumongali-anils-projects.vercel.app/
+👉flash-it-marketplace.vercel.app
 
 ---
 
